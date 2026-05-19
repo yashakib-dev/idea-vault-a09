@@ -1,11 +1,49 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
-import { HiOutlineMail } from "react-icons/hi";
-import { RiLockPasswordLine } from "react-icons/ri";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 
 const LoginPage = () => {
+  const [error, setError] = useState("");
+  const router = useRouter();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const user = Object.fromEntries(formData.entries());
+
+    const isValid =
+      user.password.length >= 8 &&
+      /[A-Z]/.test(user.password) &&
+      /[a-z]/.test(user.password);
+
+    if (!isValid) {
+      setError(
+        "Password must be 8 or 8+ character with uppercase & lowercase letter",
+      );
+      return;
+    }
+
+    const { data, error } = await authClient.signIn.email({
+      email: user.email,
+      password: user.password,
+    });
+    console.log(data);
+
+    if (data) {
+      toast.success("Login successful");
+      router.push("/");
+    }
+    if (error) {
+      toast.error(error.message);
+    }
+
+    setError("");
+  };
   return (
     <div className="min-h-screen bg-[#F4F9FD] flex items-center justify-center px-4  ">
       <div className="w-full max-w-md relative z-10">
@@ -17,7 +55,7 @@ const LoginPage = () => {
             </p>
           </div>
 
-          <form className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label className="label">
                 <span className="label-text font-semibold text-[#1A6FBF]">
@@ -25,12 +63,12 @@ const LoginPage = () => {
                 </span>
               </label>
 
-              <div className="relative">
-                <HiOutlineMail className="absolute top-1/2 left-4 -translate-y-1/2 text-gray-400 text-xl" />
+              <div>
                 <input
                   type="email"
+                  name="email"
                   placeholder="Enter your email"
-                  className="input input-bordered w-full pl-12 rounded-2xl bg-[#F4F9FD] border-black/10 focus:outline-none focus:border-[#3FA9D4] focus:bg-white transition-all duration-300"
+                  className="input input-bordered w-full rounded-2xl bg-[#F4F9FD] border-black/10 focus:outline-none focus:border-[#3FA9D4] focus:bg-white transition-all duration-300"
                   required
                 />
               </div>
@@ -43,16 +81,19 @@ const LoginPage = () => {
                 </span>
               </label>
 
-              <div className="relative">
-                <RiLockPasswordLine className="absolute top-1/2 left-4 -translate-y-1/2 text-gray-400 text-xl" />
+              <div>
                 <input
                   type="password"
+                  name="password"
                   placeholder="Enter your password"
-                  className="input input-bordered w-full pl-12 rounded-2xl bg-[#F4F9FD] border-black/10 focus:outline-none focus:border-[#3FA9D4] focus:bg-white transition-all duration-300"
+                  className="input input-bordered w-full rounded-2xl bg-[#F4F9FD] border-black/10 focus:outline-none focus:border-[#3FA9D4] focus:bg-white transition-all duration-300"
                   required
                 />
               </div>
             </div>
+            {error && (
+              <p className="text-red-500 text-sm font-medium">{error}</p>
+            )}
 
             <div className="flex justify-end">
               <Link
