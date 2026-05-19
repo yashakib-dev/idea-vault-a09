@@ -1,14 +1,14 @@
 import Link from "next/link";
 import React from "react";
 import NavLinks from "./NavLinks";
-import { RiHome2Line } from "react-icons/ri";
+import { RiHome2Line, RiUserSettingsLine } from "react-icons/ri";
 import { PiBrain } from "react-icons/pi";
+import { IoMdAdd } from "react-icons/io";
+import { HiOutlineLightBulb } from "react-icons/hi";
 
 const Navbar = () => {
-
-
   return (
-    <div className="bg-[#F4F9FD] shadow-sm">
+    <div className="bg-[#F4F9FD] border border-gray-300 shadow-sm">
       <div className="navbar container mx-auto py-5 ">
         <div className="navbar-start">
           <div className="dropdown">
@@ -33,13 +33,38 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content font-semibold bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
             >
               <li>
-                <Link href="/">Home</Link>
+                <NavLinks href={"/"}>
+                  <RiHome2Line />
+                  Home
+                </NavLinks>
               </li>
               <li>
-                <Link href="/idea">Idea</Link>
+                <NavLinks href={"/ideas"}>
+                  <PiBrain className="w-4 h-4" />
+                  Ideas
+                </NavLinks>
+              </li>
+              <li>
+                <NavLinks href={"/add-idea"}>
+                  <IoMdAdd className="w-4 h-4" />
+                  Add Idea
+                </NavLinks>
+              </li>
+              <li>
+                <NavLinks href={"/my-idea"}>
+                  <HiOutlineLightBulb className="w-4 h-4" />
+                  My Ideas
+                </NavLinks>
+              </li>
+              <li>
+                <NavLinks href={"/my-interactions"}>
+                  <RiUserSettingsLine className="w-4 h-4" />
+                  My Interactions
+                </NavLinks>
               </li>
             </ul>
           </div>
+          
           <h2 className="font-bold lg:text-4xl text-3xl text-[#1A6FBF] ">
             Idea<span className="text-[#3FA9D4]">Vault</span>
           </h2>
@@ -48,40 +73,54 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu font-semibold gap-2  text-white rounded-md menu-horizontal px-1">
             <li>
-              <NavLinks href="/">
+              <NavLinks href={"/"}>
                 <RiHome2Line />
                 Home
               </NavLinks>
             </li>
             <li>
-              <NavLinks href="/idea">
+              <NavLinks href={"/ideas"}>
                 <PiBrain className="w-4 h-4" />
-                Idea
+                Ideas
               </NavLinks>
             </li>
-            
+            <li>
+              <NavLinks href={"/add-idea"}>
+                <IoMdAdd className="w-4 h-4" />
+                Add Idea
+              </NavLinks>
+            </li>
+            <li>
+              <NavLinks href={"/my-idea"}>
+                <HiOutlineLightBulb className="w-4 h-4" />
+                My Ideas
+              </NavLinks>
+            </li>
+            <li>
+              <NavLinks href={"/my-interactions"}>
+                <RiUserSettingsLine className="w-4 h-4" />
+                My Interactions
+              </NavLinks>
+            </li>
           </ul>
         </div>
 
         <div className="navbar-end lg:flex">
           <div className="flex lg:gap-3 gap-2">
-
-
-              <div className="flex lg:gap-2 md:gap-2 items-center">
-                <Link
-                  href={"/login"}
-                  className="lg:btn md:btn rounded-3xl w-16  lg:w-25 lg:h-10 font-bold bg-transparent  text-black "
-                >
-                  Login
-                </Link>
-                <Link
-                  href={"/register"}
-                  className="lg:btn md:btn border-0 lg:bg-[#1A6FBF] md:bg-[#1A6FBF] font-bold lg:text-white md:text-white rounded-3xl"
-                >
-                  Register
-                </Link>
-              </div>
-        
+            <div className="flex lg:gap-2 md:gap-2 items-center">
+              <Link
+                href={"/login"}
+                className="lg:btn md:btn rounded-3xl w-16 lg:border border-black/30 lg:w-25 lg:h-10 font-bold bg-transparent  text-black "
+              >
+                Login
+              </Link>
+              <Link
+                href={"/register"}
+                className="lg:btn md:btn border-0 lg:bg-[#1A6FBF] md:bg-[#1A6FBF] font-bold lg:text-white hover:bg-[#3FA9D4] hover:cursor-pointer md:text-white rounded-3xl"
+              >
+                Register
+              </Link>
+            </div>
           </div>
         </div>
       </div>

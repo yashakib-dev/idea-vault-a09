@@ -6,6 +6,7 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import Link from "next/link";
 
 const slides = [
   {
@@ -56,12 +57,14 @@ const Hero = () => {
               <p className="mt-6 text-lg md:text-2xl">{slide.description}</p>
 
               <div className="flex gap-5 justify-center mt-8 flex-wrap">
-                <button className="bg-[#1A6FBF]  px-6 py-3 rounded-3xl uppercase font-semibold hover:bg-[#3FA9D4] hover:cursor-pointer transition">
-                  Explore Now
-                </button>
+                <Link href={'/ideas'}>
+                  <button className="bg-[#1A6FBF]  px-6 py-3 rounded-3xl uppercase font-semibold hover:bg-[#3FA9D4] hover:cursor-pointer duration-300 transition">
+                    Explore Ideas
+                  </button>
+                </Link>
 
-                <button className="bg-white/20 backdrop-blur px-6 py-3 rounded-3xl uppercase font-semibold hover:bg-white/30 hover:cursor-pointer transition">
-                  View Details
+                <button className="bg-white/20 backdrop-blur px-6 py-3 rounded-3xl uppercase font-semibold hover:bg-white/30 hover:cursor-pointer duration-300 transition">
+                  View Trending
                 </button>
               </div>
             </div>
