@@ -3,32 +3,45 @@
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
+import { authClient } from "@/lib/auth-client";
+import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 
 const RegisterPage = () => {
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const form = e.target;
-    const name = form.name.value;
-    const email = form.email.value;
-    const photo = form.photo.value;
-    const password = form.password.value;
+    const formData = new FormData(e.currentTarget);
+    const user = Object.fromEntries(formData.entries());
+
+    const { data, error } = await authClient.signUp.email({
+      name: user.name,
+      email: user.email,
+      password: user.password,
+      image: user.image,
+    });
+    if (data) {
+      redirect("/");
+    }
+    if (error) {
+      toast.error(error.message);
+    }
 
     const isValid =
-      password.length >= 6 && /[A-Z]/.test(password) && /[a-z]/.test(password);
+      user.password.length >= 8 &&
+      /[A-Z]/.test(user.password) &&
+      /[a-z]/.test(user.password);
 
     if (!isValid) {
       setError(
-        "Password must be 6+ character with uppercase & lowercase letter",
+        "Password must be 8 or 8+ character with uppercase & lowercase letter",
       );
       return;
     }
 
     setError("");
-
-    console.log({ name, email, photo, password });
   };
 
   return (
