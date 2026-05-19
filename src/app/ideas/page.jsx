@@ -44,7 +44,7 @@ const IdeaPage = async() => {
                   </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-gray-800 line-clamp-2">
+                <h3 className="text-lg font-bold text-gray-800 line-clamp-1">
                   {idea.title}
                 </h3>
 
