@@ -2,14 +2,18 @@
 
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 
 const LoginPage = () => {
   const [error, setError] = useState("");
+
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -17,13 +21,13 @@ const LoginPage = () => {
     const user = Object.fromEntries(formData.entries());
 
     const isValid =
-      user.password.length >= 8 &&
+      user.password.length >= 6 &&
       /[A-Z]/.test(user.password) &&
       /[a-z]/.test(user.password);
 
     if (!isValid) {
       setError(
-        "Password must be 8 or 8+ character with uppercase & lowercase letter",
+        "Password must be 6 or 6+ character with uppercase & lowercase letter",
       );
       return;
     }
@@ -31,12 +35,14 @@ const LoginPage = () => {
     const { data, error } = await authClient.signIn.email({
       email: user.email,
       password: user.password,
+      rememberMe: true,
+      callbackURL: callbackUrl || "/",
     });
     console.log(data);
 
     if (data) {
       toast.success("Login successful");
-      router.push("/");
+      router.push(callbackUrl || "/");
     }
     if (error) {
       toast.error(error.message);
@@ -44,6 +50,14 @@ const LoginPage = () => {
 
     setError("");
   };
+
+  const handleGoogleLogin = async () => {
+    const { data } = await authClient.signIn.social({
+      provider: "google",
+       callbackURL: callbackUrl || "/",
+    });
+  };
+
   return (
     <div className="min-h-screen bg-[#F4F9FD] flex items-center justify-center px-4  ">
       <div className="w-full max-w-md relative z-10">
@@ -113,7 +127,11 @@ const LoginPage = () => {
 
             <div className="divider px-3 py-6 text-sm text-gray-400">OR</div>
 
-            <button className="w-full flex items-center justify-center gap-3 border border-black/10 bg-white hover:bg-[#F4F9FD] transition-all duration-300 rounded-2xl py-2 font-medium text-gray-700 hover:scale-[1.01] hover:cursor-pointer">
+            <button
+              type="button"
+              onClick={handleGoogleLogin}
+              className="w-full flex items-center justify-center gap-3 border border-black/10 bg-white hover:bg-[#F4F9FD] transition-all duration-300 rounded-2xl py-2 font-medium text-gray-700 hover:scale-[1.01] hover:cursor-pointer"
+            >
               <FcGoogle className="text-2xl" />
               Continue with Google
             </button>

@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { useEffect, useState } from "react";
 
 const Comments = ({ ideaId }) => {
@@ -13,10 +14,15 @@ const Comments = ({ ideaId }) => {
       .then((data) => setComments(data));
   }, [ideaId]);
 
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+
   const handleComment = async () => {
     const commentData = {
       ideaId,
-      userName: "Anonymous",
+      userEmail: user?.email,
+      userName: user?.name,
+      userImage: user?.image,
       comment,
       createdAt: new Date().toISOString(),
     };
@@ -162,10 +168,12 @@ const Comments = ({ ideaId }) => {
                   </button>
                 </div>
               ) : (
-                <p className="text-gray-600 mt-2">{item.comment}</p>
+                <p className="  mb-2">{item.comment}</p>
               )}
 
-              <p>{new Date(item.createdAt).toLocaleString()}</p>
+              <p className="text-gray-600 text-sm">
+                {new Date(item.createdAt).toLocaleString()}
+              </p>
             </div>
           ))}
         </div>

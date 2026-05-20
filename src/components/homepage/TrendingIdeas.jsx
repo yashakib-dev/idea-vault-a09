@@ -15,7 +15,7 @@ const TrendingIdeas = async () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="mb-12">
 
-          <h2 className="text-4xl font-bold text-[#1A6FBF]">
+          <h2 className="text-5xl font-bold text-[#1A6FBF]">
             Discover Trending Ideas
           </h2>
         </div>
@@ -45,7 +45,7 @@ const TrendingIdeas = async () => {
                   </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-gray-800 line-clamp-2">
+                <h3 className="text-lg font-bold text-gray-800 line-clamp-1">
                   {idea.title}
                 </h3>
 

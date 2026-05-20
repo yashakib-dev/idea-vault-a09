@@ -1,5 +1,6 @@
 "use client";
 
+import { useSession } from "@/lib/auth-client";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -14,7 +15,8 @@ const categories = [
   "Environment",
 ];
 
- const StartupIdeaForm = () => {
+const StartupIdeaForm = () => {
+  const { data: session } = useSession();
   const [formData, setFormData] = useState({
     title: "",
     shortDescription: "",
@@ -35,13 +37,18 @@ const categories = [
     });
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const formData = new FormData(e.currentTarget);
-    const idea = Object.fromEntries(formData.entries());
+    const idea = {
+      ...Object.fromEntries(formData.entries()),
+      userEmail: session?.user?.email,
+      userName: session?.user?.name,
+      createdAt: new Date().toISOString(),
+    };
     console.log(formData);
-     const res = await fetch("http://localhost:5000/idea", {
+    const res = await fetch("http://localhost:5000/ideas", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -57,7 +64,7 @@ const categories = [
     <div className="min-h-screen bg-[#F4F9FD] py-10 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="mb-8 text-center">
-          <h2 className="lg:text-5xl md:text-4xl text-3xl font-bold text-[#1A6FBF]">
+          <h2 className="lg:text-5xl md:text-4xl my-5 text-3xl font-bold text-[#1A6FBF]">
             Submit Your Startup Idea
           </h2>
 

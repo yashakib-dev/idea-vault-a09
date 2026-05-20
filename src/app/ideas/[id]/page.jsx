@@ -12,14 +12,12 @@ const IdeaDetailsPage = async ({ params }) => {
 
   const {
     title,
-    _id,
     imageURL,
     proposedSolution,
     problemStatement,
     targetAudience,
     tags,
     budget,
-    category,
     detailedDescription,
     shortDescription,
   } = ideas;
@@ -40,7 +38,7 @@ const IdeaDetailsPage = async ({ params }) => {
             alt={title}
             width={1400}
             height={800}
-            className="w-full lg:h-120 rounded-2xl"
+            className="w-full lg:h-120 object-cover rounded-2xl"
           ></Image>
           <div className="space-y-5">
             <p className="inline-flex absolute top-5 md:right-10 right-5 items-center rounded-full bg-[#1A6FBF] md:px-6 px-4 py-1 md:py-2 text-xs font-semibold text-[white] ">

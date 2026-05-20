@@ -30,19 +30,27 @@ const RegisterPage = () => {
     }
 
     const isValid =
-      user.password.length >= 8 &&
+      user.password.length >= 6 &&
       /[A-Z]/.test(user.password) &&
       /[a-z]/.test(user.password);
 
     if (!isValid) {
       setError(
-        "Password must be 8 or 8+ character with uppercase & lowercase letter",
+        "Password must be 6 or 6+ character with uppercase & lowercase letter",
       );
       return;
     }
 
     setError("");
   };
+
+      const handleGoogleLogin = async () => {
+    const {data} = await authClient.signIn.social({
+      provider: "google",
+    });
+
+  };
+
 
   return (
     <div className="min-h-screen bg-[#F4F9FD] flex items-center justify-center px-4">
@@ -100,7 +108,7 @@ const RegisterPage = () => {
               </label>
 
               <input
-                name="photo"
+                name="image"
                 type="url"
                 placeholder="https://your-image.com"
                 className="input input-bordered w-full rounded-2xl bg-[#F4F9FD] border-black/10 focus:outline-none focus:border-[#3FA9D4] focus:bg-white transition-all duration-300"
@@ -139,7 +147,9 @@ const RegisterPage = () => {
 
             <div className="divider text-sm py-4 text-gray-400">OR</div>
 
-            <button className="w-full flex items-center justify-center gap-3 border border-black/10 bg-white hover:bg-[#F4F9FD] transition-all duration-300 rounded-2xl py-2 font-medium text-gray-700 hover:cursor-pointer hover:scale-[1.01]">
+            <button
+            onClick={handleGoogleLogin}
+            className="w-full flex items-center justify-center gap-3 border border-black/10 bg-white hover:bg-[#F4F9FD] transition-all duration-300 rounded-2xl py-2 font-medium text-gray-700 hover:cursor-pointer hover:scale-[1.01]">
               <FcGoogle className="text-2xl" />
               Continue with Google
             </button>
