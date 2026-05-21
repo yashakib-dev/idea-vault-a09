@@ -9,6 +9,7 @@ import { HiOutlineLightBulb } from "react-icons/hi";
 import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import ThemeToggle from "../ThemeToggle";
 
 const Navbar = () => {
     const router = useRouter();
@@ -122,6 +123,7 @@ const Navbar = () => {
               </NavLinks>
             </li>
           </ul>
+          <ThemeToggle />
         </div>
 
         <div className="navbar-end lg:flex">

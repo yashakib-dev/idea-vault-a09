@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import { Toaster } from "react-hot-toast";
+import Providers from "@/providers/ThemeProvider";
 
 const sourceCodePro = Source_Code_Pro({
   variable: "--font-source-code-pro",
@@ -17,12 +18,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html
-      lang="en" data-theme="light"
+      lang="en" 
       className={`${sourceCodePro.className}  h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <Navbar></Navbar>
-        {children}
+        <Providers>{children}</Providers>
         <Footer></Footer>
         <Toaster />
       </body>
