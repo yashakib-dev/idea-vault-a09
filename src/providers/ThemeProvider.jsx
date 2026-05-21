@@ -1,11 +1,11 @@
-import { ThemeProvider } from "next-themes";
+// import { ThemeProvider } from "next-themes";
 
-const Providers = ({children}) => {
-    return (
-        <ThemeProvider attribute="class">
-      {children}
-    </ThemeProvider>
-    );
-};
+// const Providers = ({children}) => {
+//     return (
+//         <ThemeProvider attribute="class">
+//       {children}
+//     </ThemeProvider>
+//     );
+// };
 
-export default Providers;
+// export default Providers;

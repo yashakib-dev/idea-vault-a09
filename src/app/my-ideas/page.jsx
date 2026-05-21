@@ -1,16 +1,18 @@
-import Image from "next/image";
-import Link from "next/link";
+
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import MyIdeasClient from "@/components/MyIdeasClient";
 
+export const metadata = {
+  title: "My Ideas",
+};
 const MyIdeaPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
 
   const res = await fetch(
-    `http://localhost:5000/my-ideas/${session.user.email}`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/my-ideas/${session?.user.email}`,
     {
       cache: "no-store",
     },
@@ -21,6 +23,7 @@ const MyIdeaPage = async () => {
 
   return (
    <MyIdeasClient ideas={ideas}></MyIdeasClient>
+  
   );
 };
 

@@ -1,10 +1,24 @@
 import IdeasClient from "@/components/IdeasClient";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
+export const metadata = {
+  title: "Ideas",
+};
 
 const IdeaPage = async () => {
-  const res = await fetch("http://localhost:5000/all-ideas", {
-    cache: "no-store",
-  });
+
+
+    const token =await auth.api.getToken({
+      headers: await headers(),
+    });
+    
+  
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-ideas`,{
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    });
 
   const ideas = await res.json();
 

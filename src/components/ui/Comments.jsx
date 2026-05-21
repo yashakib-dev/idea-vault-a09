@@ -9,7 +9,7 @@ const Comments = ({ ideaId }) => {
   const [editingId, setEditingId] = useState(null);
   const [editedText, setEditedText] = useState("");
   useEffect(() => {
-    fetch(`http://localhost:5000/comments/${ideaId}`)
+    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comments/${ideaId}`)
       .then((res) => res.json())
       .then((data) => setComments(data));
   }, [ideaId]);
@@ -27,7 +27,7 @@ const Comments = ({ ideaId }) => {
       createdAt: new Date().toISOString(),
     };
 
-    const res = await fetch("http://localhost:5000/comments", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -50,7 +50,7 @@ const Comments = ({ ideaId }) => {
   };
 
   const handleDelete = async (id) => {
-    const res = await fetch(`http://localhost:5000/comments/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comments/${id}`, {
       method: "DELETE",
     });
 
@@ -69,7 +69,7 @@ const Comments = ({ ideaId }) => {
   };
 
   const handleSaveEdit = async (id) => {
-    const res = await fetch(`http://localhost:5000/comments/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comments/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -116,7 +116,7 @@ const Comments = ({ ideaId }) => {
             placeholder="Write your comment..."
             value={comment}
             onChange={(e) => setComment(e.target.value)}
-            className="textarea textarea-bordered w-full rounded-2xl bg-white focus:outline-none focus:border-[#3FA9D4]"
+            className="textarea textarea-bordered w-full text-[black]/50 border border-black/50 rounded-2xl bg-white focus:outline-none focus:border-[#3FA9D4]"
           />
 
           <button
@@ -138,7 +138,7 @@ const Comments = ({ ideaId }) => {
                 <div className="flex gap-2">
                   <button
                     onClick={() => handleEdit(item._id, item.comment)}
-                    className="btn btn-ghost border border-black/20 rounded-full hover:border-[#1A6FBF]"
+                    className="btn btn-ghost border border-black/20 text-[#1A6FBF] rounded-full hover:border-[#1A6FBF]"
                   >
                     Edit
                   </button>
@@ -157,7 +157,7 @@ const Comments = ({ ideaId }) => {
                   <textarea
                     value={editedText}
                     onChange={(e) => setEditedText(e.target.value)}
-                    className="textarea rounded-2xl textarea-bordered w-full"
+                    className="textarea rounded-2xl bg-white border border-black/50 text-[black]/50 textarea-bordered w-full"
                   />
 
                   <button
@@ -168,10 +168,10 @@ const Comments = ({ ideaId }) => {
                   </button>
                 </div>
               ) : (
-                <p className="  mb-2">{item.comment}</p>
+                <p className="text-gray-600  mb-2">{item.comment}</p>
               )}
 
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-600 text-blac text-sm">
                 {new Date(item.createdAt).toLocaleString()}
               </p>
             </div>

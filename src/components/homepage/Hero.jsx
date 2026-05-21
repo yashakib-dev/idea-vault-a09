@@ -63,9 +63,11 @@ const Hero = () => {
                   </button>
                 </Link>
 
+                <Link href={'/add-idea'}>
                 <button className="bg-white/20 backdrop-blur px-6 py-3 rounded-3xl uppercase font-semibold hover:bg-white/30 hover:cursor-pointer duration-300 transition">
-                  View Trending
+                  Add Your Idea
                 </button>
+                </Link>
               </div>
             </div>
           </div>

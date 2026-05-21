@@ -48,7 +48,7 @@ const StartupIdeaForm = () => {
       createdAt: new Date().toISOString(),
     };
     console.log(formData);
-    const res = await fetch("http://localhost:5000/ideas", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/ideas`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const StartupIdeaForm = () => {
   return (
     <div className="min-h-screen bg-[#F4F9FD] py-10 px-4">
       <div className="max-w-4xl mx-auto">
-        <div className="mb-8 text-center">
+        <div className="mb-8 text-center ">
           <h2 className="lg:text-5xl md:text-4xl my-5 text-3xl font-bold text-[#1A6FBF]">
             Submit Your Startup Idea
           </h2>
@@ -87,7 +87,7 @@ const StartupIdeaForm = () => {
                   type="text"
                   name="title"
                   placeholder="Enter startup idea title"
-                  className="input rounded-3xl input-bordered w-full bg-white focus:outline-none focus:border-[#3FA9D4]"
+                  className="input rounded-3xl shadow text-black/50 input-bordered w-full bg-white focus:outline-none focus:border-[#3FA9D4]"
                   value={formData.title}
                   onChange={handleChange}
                   required
@@ -104,7 +104,7 @@ const StartupIdeaForm = () => {
                 <textarea
                   name="shortDescription"
                   placeholder="Write a short summary"
-                  className="textarea rounded-3xl textarea-bordered w-full bg-white min-h-[100px] focus:outline-none focus:border-[#3FA9D4]"
+                  className="textarea text-black/50 shadow rounded-3xl textarea-bordered w-full bg-white min-h-[100px] focus:outline-none focus:border-[#3FA9D4]"
                   value={formData.shortDescription}
                   onChange={handleChange}
                   required
@@ -121,7 +121,7 @@ const StartupIdeaForm = () => {
                 <textarea
                   name="detailedDescription"
                   placeholder="Explain your startup idea in detail"
-                  className="textarea rounded-3xl textarea-bordered w-full bg-white min-h-[160px] focus:outline-none focus:border-[#3FA9D4]"
+                  className="textarea text-black/50 shadow rounded-3xl textarea-bordered w-full bg-white min-h-[160px] focus:outline-none focus:border-[#3FA9D4]"
                   value={formData.detailedDescription}
                   onChange={handleChange}
                   required
@@ -138,7 +138,7 @@ const StartupIdeaForm = () => {
 
                   <select
                     name="category"
-                    className="select rounded-3xl select-bordered w-full bg-white focus:outline-none focus:border-[#3FA9D4]"
+                    className="select text-black/50 rounded-3xl shadow select-bordered w-full bg-white focus:outline-none focus:border-[#3FA9D4]"
                     value={formData.category}
                     onChange={handleChange}
                   >
@@ -161,7 +161,7 @@ const StartupIdeaForm = () => {
                     type="number"
                     name="budget"
                     placeholder="$5000"
-                    className="input rounded-3xl input-bordered w-full bg-white focus:outline-none focus:border-[#3FA9D4]"
+                    className="input text-black/50 rounded-3xl shadow input-bordered w-full bg-white focus:outline-none focus:border-[#3FA9D4]"
                     value={formData.budget}
                     onChange={handleChange}
                   />
@@ -179,7 +179,7 @@ const StartupIdeaForm = () => {
                   type="text"
                   name="tags"
                   placeholder="AI, SaaS, Startup, Mobile App"
-                  className="input input-bordered rounded-3xl w-full bg-white focus:outline-none focus:border-[#3FA9D4]"
+                  className="input text-black/50 input-bordered shadow rounded-3xl w-full bg-white focus:outline-none focus:border-[#3FA9D4]"
                   value={formData.tags}
                   onChange={handleChange}
                 />
@@ -196,7 +196,7 @@ const StartupIdeaForm = () => {
                   type="url"
                   name="imageURL"
                   placeholder="https://yourimage/image.jpg"
-                  className="input input-bordered w-full rounded-3xl bg-white focus:outline-none focus:border-[#3FA9D4]"
+                  className="input text-black/50 input-bordered shadow w-full rounded-3xl bg-white focus:outline-none focus:border-[#3FA9D4]"
                   value={formData.imageURL}
                   onChange={handleChange}
                 />
@@ -212,7 +212,7 @@ const StartupIdeaForm = () => {
                 <textarea
                   name="targetAudience"
                   placeholder="Who will use this product?"
-                  className="textarea textarea-bordered rounded-3xl w-full bg-white min-h-[100px] focus:outline-none focus:border-[#3FA9D4]"
+                  className="textarea textarea-bordered shadow rounded-3xl w-full bg-white min-h-[100px] text-black/50 focus:outline-none focus:border-[#3FA9D4]"
                   value={formData.targetAudience}
                   onChange={handleChange}
                   required
@@ -229,7 +229,7 @@ const StartupIdeaForm = () => {
                 <textarea
                   name="problemStatement"
                   placeholder="What problem are you solving?"
-                  className="textarea rounded-3xl textarea-bordered w-full bg-white min-h-[120px] focus:outline-none focus:border-[#3FA9D4]"
+                  className="textarea rounded-3xl shadow textarea-bordered w-full bg-white min-h-[120px] text-black/50 focus:outline-none focus:border-[#3FA9D4]"
                   value={formData.problemStatement}
                   onChange={handleChange}
                   required
@@ -246,7 +246,7 @@ const StartupIdeaForm = () => {
                 <textarea
                   name="proposedSolution"
                   placeholder="Describe your proposed solution"
-                  className="textarea rounded-3xl textarea-bordered w-full bg-white min-h-[140px] focus:outline-none focus:border-[#3FA9D4]"
+                  className="textarea text-black/50 shadow rounded-3xl textarea-bordered w-full bg-white min-h-[140px] focus:outline-none focus:border-[#3FA9D4]"
                   value={formData.proposedSolution}
                   onChange={handleChange}
                   required

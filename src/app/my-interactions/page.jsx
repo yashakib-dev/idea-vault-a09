@@ -1,14 +1,16 @@
 import React from "react";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-
+export const metadata = {
+  title: "My Interactions",
+};
 const MyInteractionsPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
 
   const res = await fetch(
-    `http://localhost:5000/my-comments/${session.user.email}`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/my-comments/${session?.user.email}`,
     {
       cache: "no-store",
     },
@@ -25,7 +27,7 @@ const MyInteractionsPage = async () => {
           All your comments and contributions across the platform
         </p>
         <div className="card bg-[#F4F9FD] shadow-xl p-6 mt-10 rounded-2xl border border-[#d8e8f4]">
-          <h2 className="text-2xl font-bold">Comments ({comments.length})</h2>
+          <h2 className="text-2xl text-black font-bold">Comments ({comments.length})</h2>
 
           <p className="text-gray-600 mb-4">Ideas you've commented on</p>
 

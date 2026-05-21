@@ -12,12 +12,12 @@ import { useRouter } from "next/navigation";
 import ThemeToggle from "../ThemeToggle";
 
 const Navbar = () => {
-    const router = useRouter();
+  const router = useRouter();
   const { data: session } = authClient.useSession();
   const user = session?.user;
   console.log(session);
-  
-    const handleLogout = async () => {
+
+  const handleLogout = async () => {
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
@@ -32,7 +32,7 @@ const Navbar = () => {
       <div className="navbar container mx-auto py-5 ">
         <div className="navbar-start">
           <div className="dropdown">
-            <label tabIndex={0} className="btn btn-ghost lg:hidden">
+            <label tabIndex={0} className="btn btn-ghost text-black lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -50,9 +50,9 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content font-semibold bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-white font-semibold bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
             >
-              <li>
+              <li >
                 <NavLinks href={"/"}>
                   <RiHome2Line />
                   Home
@@ -123,49 +123,84 @@ const Navbar = () => {
               </NavLinks>
             </li>
           </ul>
-          <ThemeToggle />
+          {/* <ThemeToggle /> */}
         </div>
 
         <div className="navbar-end lg:flex">
-          <div className="flex lg:gap-3 gap-2">
-            {user ? (
-              <>
-              <div className="flex items-center lg:gap-3 gap-2">
-              
-                <Image
-                  src={user?.image || "https://i.ibb.co.com/xqykWXq5/avatar-15.png"}
-                  alt="Profile"
-                  width={42}
-                  height={42}
-                  className="rounded-full mx-auto object-cover h-10 w-10 border hover:cursor-pointer border-[#1A6FBF]"
-                />
-                
-                <button
-                  onClick={handleLogout}
-                  className="lg:btn md:btn border-0 lg:bg-[#1A6FBF] md:bg-[#1A6FBF] font-bold lg:text-white hover:bg-[#3FA9D4] hover:cursor-pointer md:text-white rounded-3xl "
-                >
-                  Logout
-                </button>
-              </div>
-              </>
-            ) : (
-              <>
-                <div className="flex lg:gap-2 md:gap-2 items-center">
-                  <Link
-                    href={"/login"}
-                    className="lg:btn md:btn rounded-3xl w-16 lg:border border-black/30 lg:w-25 lg:h-10 font-bold bg-transparent  text-black "
-                  >
-                    Login
-                  </Link>
-                  <Link
-                    href={"/register"}
-                    className="lg:btn md:btn border-0 lg:bg-[#1A6FBF] md:bg-[#1A6FBF] font-bold lg:text-white hover:bg-[#3FA9D4] hover:cursor-pointer md:text-white rounded-3xl"
-                  >
-                    Register
-                  </Link>
-                </div>
-              </>
-            )}
+          <div className="navbar-end relative z-50">
+            <div className="flex items-center gap-3">
+              {user ? (
+                <>
+                  {/* <ThemeToggle /> */}
+
+                  <div className="dropdown dropdown-end">
+                    <div tabIndex={0} role="button" className="cursor-pointer">
+                      <Image
+                        src={
+                          user?.image ||
+                          "https://i.ibb.co.com/xqykWXq5/avatar-15.png"
+                        }
+                        alt="Profile"
+                        width={42}
+                        height={42}
+                        className="rounded-full object-cover h-10 w-10 border border-[#1A6FBF]"
+                      />
+                    </div>
+
+                    <ul
+                      tabIndex={0}
+                      className="menu dropdown-content mt-3 w-60 rounded-2xl border border-black/10 bg-white shadow-xl p-3 space-y-2"
+                    >
+                      <div className="px-2 py-2 border-b border-black/10">
+                        <h2 className="font-bold text-[#1A6FBF]">
+                          {user?.name}
+                        </h2>
+
+                        <p className="text-sm text-gray-500 break-all">
+                          {user?.email}
+                        </p>
+                      </div>
+
+                      <li className="text-black">
+                        <Link href="/profile">My Profile</Link>
+                      </li>
+
+                      <li className="text-black">
+                        <Link href="/my-ideas">My Ideas</Link>
+                      </li>
+
+                      
+
+                      <li>
+                        <button onClick={handleLogout} className="text-red-500">
+                          Logout
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <ThemeToggle />
+
+                  <div className="flex gap-2 items-center">
+                    <Link
+                      href={"/login"}
+                      className="btn rounded-3xl border border-black/20 bg-transparent text-black"
+                    >
+                      Login
+                    </Link>
+
+                    <Link
+                      href={"/register"}
+                      className="btn border-0 bg-[#1A6FBF] text-white rounded-3xl hover:bg-[#3FA9D4]"
+                    >
+                      Register
+                    </Link>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>

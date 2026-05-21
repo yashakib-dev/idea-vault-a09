@@ -76,7 +76,7 @@ const RegisterPage = () => {
                   name="name"
                   type="text"
                   placeholder="Enter your name"
-                  className="input input-bordered w-full rounded-2xl bg-[#F4F9FD] border-black/10 focus:outline-none focus:border-[#3FA9D4] focus:bg-white transition-all duration-300"
+                  className="input input-bordered w-full rounded-2xl text-black/50 bg-[#F4F9FD] border-black/10 focus:outline-none focus:border-[#3FA9D4] focus:bg-white transition-all duration-300"
                   required
                 />
               </div>
@@ -94,7 +94,7 @@ const RegisterPage = () => {
                   name="email"
                   type="email"
                   placeholder="Enter your email"
-                  className="input input-bordered w-full rounded-2xl bg-[#F4F9FD] border-black/10 focus:outline-none focus:border-[#3FA9D4] focus:bg-white transition-all duration-300"
+                  className="input input-bordered text-black/50 w-full rounded-2xl bg-[#F4F9FD] border-black/10 focus:outline-none focus:border-[#3FA9D4] focus:bg-white transition-all duration-300"
                   required
                 />
               </div>
@@ -111,7 +111,7 @@ const RegisterPage = () => {
                 name="image"
                 type="url"
                 placeholder="https://your-image.com"
-                className="input input-bordered w-full rounded-2xl bg-[#F4F9FD] border-black/10 focus:outline-none focus:border-[#3FA9D4] focus:bg-white transition-all duration-300"
+                className="input input-bordered text-black/50 w-full rounded-2xl bg-[#F4F9FD] border-black/10 focus:outline-none focus:border-[#3FA9D4] focus:bg-white transition-all duration-300"
                 required
               />
             </div>
@@ -128,7 +128,7 @@ const RegisterPage = () => {
                   name="password"
                   type="password"
                   placeholder="Enter password"
-                  className="input input-bordered w-full rounded-2xl bg-[#F4F9FD] border-black/10 focus:outline-none focus:border-[#3FA9D4] focus:bg-white transition-all duration-300"
+                  className="input input-bordered w-full text-black/50 rounded-2xl bg-[#F4F9FD] border-black/10 focus:outline-none focus:border-[#3FA9D4] focus:bg-white transition-all duration-300"
                   required
                 />
               </div>
@@ -145,8 +145,8 @@ const RegisterPage = () => {
               Register
             </button>
 
-            <div className="divider text-sm py-4 text-gray-400">OR</div>
-
+            <div className="divider  text-sm py-4 text-gray-400">OR</div>
+              
             <button
             onClick={handleGoogleLogin}
             className="w-full flex items-center justify-center gap-3 border border-black/10 bg-white hover:bg-[#F4F9FD] transition-all duration-300 rounded-2xl py-2 font-medium text-gray-700 hover:cursor-pointer hover:scale-[1.01]">

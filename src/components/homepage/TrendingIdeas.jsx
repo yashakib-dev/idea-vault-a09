@@ -3,21 +3,27 @@ import Link from "next/link";
 import { FaArrowRightLong } from "react-icons/fa6";
 
 
+
 const TrendingIdeas = async () => {
-  const res = await fetch("http://localhost:5000/ideas", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/ideas`, {
     cache: "no-store",
   });
 
   const ideas = await res.json();
+
 
   return (
     <div className="bg-[#F4F9FD] py-24">
       <div className="max-w-7xl mx-auto px-4">
         <div className="mb-12">
 
-          <h2 className="text-5xl font-bold text-[#1A6FBF]">
+          <h2 className="lg:text-5xl text-4xl text-center font-bold text-[#1A6FBF]">
             Discover Trending Ideas
           </h2>
+          <p className="text-gray-600 mt-4 text-center max-w-2xl mx-auto">
+            Explore the most popular startup ideas that are capturing the
+            community's attention.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

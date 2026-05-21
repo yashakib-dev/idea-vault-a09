@@ -18,7 +18,7 @@ const MyIdeasClient = ({ ideas: initialIdeas }) => {
   };
 
   const handleSave = async (id) => {
-    const res = await fetch(`http://localhost:5000/ideas/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/ideas/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -45,7 +45,7 @@ const MyIdeasClient = ({ ideas: initialIdeas }) => {
   };
 
   const handleDelete = async (id) => {
-    const res = await fetch(`http://localhost:5000/ideas/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/ideas/${id}`, {
       method: "DELETE",
     });
 
@@ -77,7 +77,7 @@ const MyIdeasClient = ({ ideas: initialIdeas }) => {
                 alt="idea"
               />
 
-              <h2 className="lg:text-4xl md:text-3xl text-2xl font-bold">
+              <h2 className="lg:text-4xl text-[#1A6FBF] md:text-3xl text-2xl font-bold">
                 No ideas yet
               </h2>
 
@@ -129,13 +129,13 @@ const MyIdeasClient = ({ ideas: initialIdeas }) => {
                         <input
                           value={editedTitle}
                           onChange={(e) => setEditedTitle(e.target.value)}
-                          className="input input-bordered w-full"
+                          className="input bg-white border border-gray-300 text-black/50 w-full"
                         />
 
                         <textarea
                           value={editedDesc}
                           onChange={(e) => setEditedDesc(e.target.value)}
-                          className="textarea textarea-bordered w-full"
+                          className="textarea bg-white border border-gray-300 text-black/50 textarea-bordered w-full"
                         />
 
                         <button
@@ -157,7 +157,7 @@ const MyIdeasClient = ({ ideas: initialIdeas }) => {
 
                     <button
                       onClick={() => handleEdit(idea)}
-                      className="btn btn-sm btn-ghost border border-black/20 rounded-full hover:border-[#1A6FBF]"
+                      className="btn btn-sm btn-ghost border text-[#1A6FBF] border-black/20 rounded-full hover:border-[#1A6FBF] hover:bg-[#1A6FBF]/10"
                     >
                       Edit
                     </button>

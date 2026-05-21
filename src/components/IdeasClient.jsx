@@ -10,18 +10,24 @@ const IdeasClient = ({ initialIdeas }) => {
 
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
+  const [loading, setLoading] = useState(false);
 
   const fetchIdeas = async () => {
-    const res = await fetch(
-      `http://localhost:5000/all-ideas?search=${search}&category=${category}`,
-      {
-        cache: "no-store",
-      },
-    );
+    try {
+      setLoading(true);
 
-    const data = await res.json();
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/all-ideas?search=${search}&category=${category}`,
+        { cache: "no-store" },
+      );
 
-    setIdeas(data);
+      const data = await res.json();
+      setIdeas(data);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -36,13 +42,13 @@ const IdeasClient = ({ initialIdeas }) => {
           placeholder="Search ideas..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="input input-bordered focus:outline-none w-full rounded-2xl"
+          className="input input-bordered focus:outline-none text-[black]/50 bg-white border border-black/50 w-full rounded-2xl"
         />
 
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="select select-bordered focus:outline-none  rounded-2xl"
+          className="select select-bordered text-[black]/50 border border-black/50 bg-white focus:outline-none  rounded-2xl"
         >
           <option>All</option>
           <option>Tech</option>
@@ -53,11 +59,20 @@ const IdeasClient = ({ initialIdeas }) => {
         </select>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {ideas.map((idea) => (
+      {loading && (
+        <div className="flex flex-col items-center justify-center py-20">
+          <div className="w-12 h-12 border-4 border-[#1A6FBF] border-t-transparent rounded-full animate-spin"></div>
+          <p className="mt-3 text-[#1A6FBF] font-semibold">Loading ideas...</p>
+        </div>
+      )}
+
+
+      {!loading && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {ideas?.map((idea) => (
           <div
             key={idea._id}
-           className="group relative overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm hover:shadow-[0_20px_50px_rgba(26,111,191,0.12)] hover:-translate-y-2  transition-all duration-300 ease-out"
+            className="group relative overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm hover:shadow-[0_20px_50px_rgba(26,111,191,0.12)] hover:-translate-y-2  transition-all duration-300 ease-out"
           >
             <Image
               src={idea?.imageURL}
@@ -69,10 +84,10 @@ const IdeasClient = ({ initialIdeas }) => {
 
             <div className="p-5 space-y-3">
               <span className="inline-flex rounded-full bg-[#1A6FBF]/10 px-3 py-1 text-xs font-semibold text-[#1A6FBF]">
-                {idea.category}
+                {idea?.category}
               </span>
 
-              <h3 className="text-lg font-bold line-clamp-1">
+              <h3 className="text-lg text-[#1A6FBF] font-bold line-clamp-1">
                 {idea?.title}
               </h3>
 
@@ -90,6 +105,8 @@ const IdeasClient = ({ initialIdeas }) => {
           </div>
         ))}
       </div>
+      )}
+      
     </div>
   );
 };
