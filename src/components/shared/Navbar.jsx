@@ -181,7 +181,7 @@ const Navbar = () => {
                 </>
               ) : (
                 <>
-                  <ThemeToggle />
+                  {/* <ThemeToggle /> */}
 
                   <div className="flex gap-2 items-center">
                     <Link
