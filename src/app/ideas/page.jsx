@@ -1,6 +1,4 @@
 import IdeasClient from "@/components/IdeasClient";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
 
 export const metadata = {
   title: "Ideas",
