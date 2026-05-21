@@ -13,7 +13,7 @@ const TrendingIdeas = async () => {
 
 
   return (
-    <div className="bg-[#F4F9FD] py-24">
+    <div className="dark:bg-[#F4F9FD] bg-black py-24">
       <div className="max-w-7xl mx-auto px-4">
         <div className="mb-12">
 

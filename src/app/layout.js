@@ -14,13 +14,9 @@ export const metadata = {
     default: "IdeaVault",
     template: "%s | IdeaVault",
   },
-  description: "IdeaVault is a web-based platform where users can share innovative startup ideas",
+  description:
+    "IdeaVault is a web-based platform where users can share innovative startup ideas",
 };
-
-// export const metadata = {
-//   title: "IdeaVault - Startup Idea Sharing Platform",
-//   description: "IdeaVault is a web-based platform where users can share innovative startup ideas",
-// };
 
 export default function RootLayout({ children }) {
   return (
@@ -29,10 +25,18 @@ export default function RootLayout({ children }) {
       suppressHydrationWarning
       className={`${sourceCodePro.className} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <Navbar />
-        {children}
-        <Footer />
+      <body className="min-h-full flex flex-col dark:bg-[#0B0B0B] dark:text-white bg-[#F4F9FD] text-black">
+        <Providers
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          {children}
+          <Footer />
+        </Providers>
+
         <Toaster />
       </body>
     </html>
