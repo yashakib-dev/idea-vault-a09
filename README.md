@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# IdeaVault
 
-## Getting Started
+Live Site(Frontend): https://idea-vault-a09.vercel.app/
+<br>
+Live Site(Backend): https://idea-vault-a09-server.vercel.app/
 
-First, run the development server:
+## 🚀 Project Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+IdeaVault is a modern startup idea sharing platform where users can explore, post, manage, and interact with innovative startup ideas. Users can authenticate securely, comment on ideas, and manage their own contributions through a beautiful responsive UI.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## ✨ Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- 🔐 Secure Authentication using Email/Password and Google Login
+- 💡 Users can Add, Edit, and Delete their own startup ideas
+- 🔎 Search and Filter ideas by title and category
+- 💬 Interactive Comment System with edit & delete functionality
+- 🌙 Dynamic Dark & Light Theme Toggle
+- 📱 Fully Responsive UI for mobile, tablet, and desktop
+- 🛡️ Protected Private Routes using JWT Authentication
+- ⚡ Loading Spinner and Custom 404 Page for better UX
+- 👤 Dynamic User Profile with idea and interaction statistics
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Technologies Used
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Frontend & npm packages
+- Next.js
+- Tailwind CSS
+- DaisyUI
+- Better Auth
+- React-icons
+- React-hot-toast
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Backend
+- Express.js
+- MongoDB
+- JWT Authentication
+- JOSE
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📂 Main Pages
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Home Page
+- All Ideas Page
+- Idea Details Page
+- Add Idea Page
+- My Ideas Page
+- My Interactions Page
+- Profile Page
+- Login & Register Pages
+
+---
+
+## 🔐 Authentication Features
+
+- Email & Password Login
+- Google Authentication
+- JWT Token Verification
+- Protected Routes
+- Session Management
