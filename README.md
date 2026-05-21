@@ -33,6 +33,7 @@ IdeaVault is a modern startup idea sharing platform where users can explore, pos
 - Better Auth
 - React-icons
 - React-hot-toast
+- Swiper
 
 ### Backend
 - Express.js
