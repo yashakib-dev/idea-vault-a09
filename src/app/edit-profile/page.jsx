@@ -52,8 +52,8 @@ const ProfileEdit = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: profile.name,
-          image: profile.image,
+          name: profile?.name,
+          image: profile?.image,
           
         }),
       }
@@ -82,7 +82,7 @@ const ProfileEdit = () => {
 
           <input
             name="name"
-            value={profile.name}
+            value={profile?.name}
             onChange={handleChange}
             placeholder="Name"
             className="input w-full bg-white border-black/50 text-black border rounded-xl p-3"
@@ -90,7 +90,7 @@ const ProfileEdit = () => {
 
           <input
             name="image"
-            value={profile.image}
+            value={profile?.image}
             onChange={handleChange}
             placeholder="Image URL"
             className="input w-full bg-white border-black/50 text-black border rounded-xl p-3"
