@@ -186,14 +186,14 @@ const Navbar = () => {
                   <div className="flex gap-2 items-center">
                     <Link
                       href={"/login"}
-                      className="btn rounded-3xl border border-black/20 bg-transparent text-black"
+                      className="lg:btn md:btn rounded-3xl border border-black/20 bg-transparent text-black"
                     >
                       Login
                     </Link>
 
                     <Link
                       href={"/register"}
-                      className="btn border-0 bg-[#1A6FBF] text-white rounded-3xl hover:bg-[#3FA9D4]"
+                      className="lg:btn md:btn border-0 bg-[#1A6FBF] text-white rounded-3xl hover:bg-[#3FA9D4]"
                     >
                       Register
                     </Link>
