@@ -4,7 +4,7 @@ import { HiOutlineLightBulb } from "react-icons/hi";
 
 const ReadyToShare = () => {
   return (
-    <div className="bg-[#F4F9FD] py-24 px-4">
+    <div className="bg-[#F4F9FD] dark:bg-[#0B0B0B] py-24 px-4 transition-colors duration-300">
       <div className="max-w-6xl mx-auto">
         
         <div className="relative overflow-hidden rounded-[40px] bg-gradient-to-r from-[#1A6FBF] to-[#3FA9D4] p-10 md:p-16 shadow-[0_20px_60px_rgba(26,111,191,0.25)]">

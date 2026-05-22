@@ -7,7 +7,8 @@ const NavLinks = ({href, children}) => {
     
     return (
         <Link href={href}
-        className={`${pathname === href ? "bg-[#1A6FBF]  rounded-2xl text-white font-bold" : " "}text-black hover:rounded-3xl`}
+        className={`${pathname === href ? "bg-[#1A6FBF] text-white rounded-2xl font-bold" : "text-black dark:text-white/80 hover:text-[#1A6FBF] dark:hover:text-[#3FA9D4]"} 
+        hover:rounded-3xl`}
         >{children}</Link>
     );
 };

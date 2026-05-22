@@ -10,13 +10,11 @@ import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import ThemeToggle from "../ThemeToggle";
-import { useTheme } from "next-themes";
 const Navbar = () => {
   const router = useRouter();
   const { data: session } = authClient.useSession();
   const user = session?.user;
   console.log(session);
-  const { theme, setTheme } = useTheme();
 
   const handleLogout = async () => {
     await authClient.signOut({
@@ -29,14 +27,14 @@ const Navbar = () => {
   };
 
   return (
-    <div className={theme == "light" ? "bg-white" : "bg-gray-500"}>
-      <div className=" border border-gray-300 shadow-sm">
+    <div className="bg-white dark:bg-[#0B0B0B] text-black dark:text-white transition-colors duration-300">
+      <div className="border-b border-gray-200 dark:border-white/10 shadow-sm">
         <div className="navbar container mx-auto py-5 ">
           <div className="navbar-start">
             <div className="dropdown">
               <label
                 tabIndex={0}
-                className="btn btn-ghost text-black lg:hidden"
+                className="btn btn-ghost text-black dark:text-white lg:hidden"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +53,7 @@ const Navbar = () => {
               </label>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-white font-semibold bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
+                className="menu menu-sm dropdown-content bg-white dark:bg-[#1E1E1E] text-black dark:text-white font-semibold rounded-box z-10 mt-3 w-52 p-2 shadow border border-black/10 dark:border-white/10"
               >
                 <li>
                   <NavLinks href={"/"}>
@@ -96,7 +94,7 @@ const Navbar = () => {
           </div>
 
           <div className={"navbar-center hidden lg:flex"}>
-            <ul className="menu font-semibold gap-2  text-white rounded-md menu-horizontal px-1">
+            <ul className="menu font-semibold gap-2 text-black dark:text-white rounded-md menu-horizontal px-1">
               <li>
                 <NavLinks href={"/"}>
                   <RiHome2Line />
@@ -134,10 +132,10 @@ const Navbar = () => {
           <div className="navbar-end lg:flex">
             <div className="navbar-end relative z-50">
               <div className="flex items-center gap-3">
+                <ThemeToggle />
+
                 {user ? (
                   <>
-                    {/* <ThemeToggle /> */}
-
                     <div className="dropdown dropdown-end">
                       <div
                         tabIndex={0}
@@ -158,30 +156,30 @@ const Navbar = () => {
 
                       <ul
                         tabIndex={0}
-                        className="menu dropdown-content mt-3 w-60 rounded-2xl border border-black/10 bg-white shadow-xl p-3 space-y-2"
+                        className="menu dropdown-content mt-3 w-60 rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-[#1E1E1E] text-black dark:text-white shadow-xl p-3 space-y-2"
                       >
-                        <div className="px-2 py-2 border-b border-black/10">
+                        <div className="px-2 py-2 border-b border-black/10 dark:border-white/10">
                           <h2 className="font-bold text-[#1A6FBF]">
                             {user?.name}
                           </h2>
 
-                          <p className="text-sm text-gray-500 break-all">
+                          <p className="text-sm text-gray-500 dark:text-gray-400 break-all">
                             {user?.email}
                           </p>
                         </div>
 
-                        <li className="text-black">
-                          <Link href="/profile">My Profile</Link>
+                        <li>
+                          <Link href="/profile" className="text-black dark:text-white/90 hover:text-[#1A6FBF] dark:hover:text-[#3FA9D4]">My Profile</Link>
                         </li>
 
-                        <li className="text-black">
-                          <Link href="/my-ideas">My Ideas</Link>
+                        <li>
+                          <Link href="/my-ideas" className="text-black dark:text-white/90 hover:text-[#1A6FBF] dark:hover:text-[#3FA9D4]">My Ideas</Link>
                         </li>
 
                         <li>
                           <button
                             onClick={handleLogout}
-                            className="text-red-500"
+                            className="text-red-500 hover:text-red-600 w-full text-left"
                           >
                             Logout
                           </button>
@@ -191,12 +189,10 @@ const Navbar = () => {
                   </>
                 ) : (
                   <>
-                    <ThemeToggle />
-
-                    <div className="flex  gap-2 items-center">
+                    <div className="flex gap-2 items-center">
                       <Link
                         href={"/login"}
-                        className="btn lg:text-[16px] md:text-[16px] text-sm rounded-3xl border border-black/20 bg-transparent text-black"
+                        className="btn lg:text-[16px] md:text-[16px] text-sm rounded-3xl border border-black/20 dark:border-white/20 bg-transparent text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/5"
                       >
                         Login
                       </Link>

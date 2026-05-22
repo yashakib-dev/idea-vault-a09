@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col dark:bg-[#0B0B0B] dark:text-white bg-[#F4F9FD] text-black">
         <Providers
-          attribute="class"
+          attribute="data-theme"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange

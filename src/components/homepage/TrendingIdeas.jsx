@@ -13,16 +13,16 @@ const TrendingIdeas = async () => {
 
 
   return (
-    <div className="dark:bg-[#F4F9FD] bg-black py-24">
+    <div className="bg-white dark:bg-[#121212] py-24 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4">
         <div className="mb-12">
 
           <h2 className="lg:text-5xl text-4xl text-center font-bold text-[#1A6FBF]">
             Discover Trending Ideas
           </h2>
-          <p className="text-gray-600 mt-4 text-center max-w-2xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-400 mt-4 text-center max-w-2xl mx-auto">
             Explore the most popular startup ideas that are capturing the
-            community's attention.
+            community&apos;s attention.
           </p>
         </div>
 
@@ -30,7 +30,7 @@ const TrendingIdeas = async () => {
           {ideas.map((idea) => (
             <div
               key={idea._id}
-              className="group relative overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm hover:shadow-[0_20px_50px_rgba(26,111,191,0.12)] hover:-translate-y-2  transition-all duration-300 ease-out"
+              className="group relative overflow-hidden rounded-2xl border border-black/10 dark:border-white/5 bg-white dark:bg-[#1E1E1E] shadow-sm hover:shadow-[0_20px_50px_rgba(26,111,191,0.12)] hover:-translate-y-2 transition-all duration-300 ease-out"
             >
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none" />
 
@@ -51,11 +51,11 @@ const TrendingIdeas = async () => {
                   </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-gray-800 line-clamp-1">
+                <h3 className="text-lg font-bold text-gray-800 dark:text-white line-clamp-1">
                   {idea.title}
                 </h3>
 
-                <p className="text-sm text-gray-500 line-clamp-2">
+                <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">
                   {idea.shortDescription}
                 </p>
 

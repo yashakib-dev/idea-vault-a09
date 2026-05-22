@@ -31,7 +31,9 @@ const IdeasClient = ({ initialIdeas }) => {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchIdeas();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search, category]);
 
   return (
@@ -42,13 +44,13 @@ const IdeasClient = ({ initialIdeas }) => {
           placeholder="Search ideas..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="input input-bordered focus:outline-none text-[black]/50 bg-white border border-black/50 w-full rounded-2xl"
+          className="input input-bordered focus:outline-none text-black dark:text-white bg-white dark:bg-[#1E1E1E] border border-black/20 dark:border-white/10 w-full rounded-2xl focus:border-[#3FA9D4]"
         />
 
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="select select-bordered text-[black]/50 border border-black/50 bg-white focus:outline-none  rounded-2xl"
+          className="select select-bordered text-black dark:text-white border border-black/20 dark:border-white/10 bg-white dark:bg-[#1E1E1E] focus:outline-none rounded-2xl focus:border-[#3FA9D4]"
         >
           <option>All</option>
           <option>Tech</option>
@@ -72,7 +74,7 @@ const IdeasClient = ({ initialIdeas }) => {
         {ideas?.map((idea) => (
           <div
             key={idea._id}
-            className="group relative overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm hover:shadow-[0_20px_50px_rgba(26,111,191,0.12)] hover:-translate-y-2  transition-all duration-300 ease-out"
+            className="group relative overflow-hidden rounded-2xl border border-black/10 dark:border-white/5 bg-white dark:bg-[#1E1E1E] shadow-sm hover:shadow-[0_20px_50px_rgba(26,111,191,0.12)] hover:-translate-y-2 transition-all duration-300 ease-out"
           >
             <Image
               src={idea?.imageURL}
@@ -91,7 +93,7 @@ const IdeasClient = ({ initialIdeas }) => {
                 {idea?.title}
               </h3>
 
-              <p className="text-sm text-gray-500 line-clamp-2">
+              <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">
                 {idea?.shortDescription}
               </p>
 

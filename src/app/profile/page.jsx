@@ -30,16 +30,16 @@ const ProfilePage = () => {
 
   if (isPending) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#F4F9FD]">
+      <div className="min-h-screen flex items-center justify-center bg-[#F4F9FD] dark:bg-[#0B0B0B] transition-colors duration-300">
         <span className="loading loading-spinner loading-lg text-[#1A6FBF]" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#F4F9FD] py-10 px-4">
+    <div className="min-h-screen bg-[#F4F9FD] dark:bg-[#0B0B0B] py-10 px-4 transition-colors duration-300">
       <div className="max-w-5xl mx-auto">
-        <div className="bg-white rounded-3xl border border-black/10 shadow-sm overflow-hidden">
+        <div className="bg-white dark:bg-[#1E1E1E] rounded-3xl border border-black/10 dark:border-white/5 shadow-sm overflow-hidden transition-colors duration-300">
      
           <div className="h-48 bg-gradient-to-r from-[#1A6FBF] to-[#3FA9D4]" />
 
@@ -54,20 +54,20 @@ const ProfilePage = () => {
                   alt={user?.name || "user"}
                   width={130}
                   height={130}
-                  className="rounded-full border-[6px] border-white object-cover h-32 w-32 shadow-lg bg-white"
+                  className="rounded-full border-[6px] border-white dark:border-[#1E1E1E] object-cover h-32 w-32 shadow-lg bg-white dark:bg-[#1E1E1E]"
                 />
 
                 <div className="pb-2">
-                  <h2 className="text-3xl font-black text-[white] pb-2">
+                  <h2 className="text-3xl font-black text-black dark:text-white pb-2">
                     {user?.name}
                   </h2>
 
-                  <div className="flex items-center gap-2 text-gray-500 mt-2">
+                  <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 mt-2">
                     <HiOutlineMail />
                     <p>{user?.email}</p>
                   </div>
 
-                  <p className="text-sm text-gray-400 mt-1">
+                  <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">
                     Joined {new Date(user?.createdAt).toLocaleDateString()}
                   </p>
                 </div>
@@ -82,12 +82,12 @@ const ProfilePage = () => {
          
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-10">
         
-              <div className="bg-[#F4F9FD] rounded-2xl p-6 border border-[#d8e8f4]">
+              <div className="bg-[#F4F9FD] dark:bg-[#2A2A2A] rounded-2xl p-6 border border-[#d8e8f4] dark:border-white/5 transition-colors duration-300">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-gray-500 text-sm">Total Ideas</p>
+                    <p className="text-gray-500 dark:text-gray-400 text-sm">Total Ideas</p>
 
-                    <h2 className="text-4xl font-black text-[#1A6FBF] mt-2">
+                    <h2 className="text-4xl font-black text-[#1A6FBF] dark:text-[#3FA9D4] mt-2">
                       {ideasCount}
                     </h2>
                   </div>
@@ -98,12 +98,12 @@ const ProfilePage = () => {
                 </div>
               </div>
 
-              <div className="bg-[#F4F9FD] rounded-2xl p-6 border border-[#d8e8f4]">
+              <div className="bg-[#F4F9FD] dark:bg-[#2A2A2A] rounded-2xl p-6 border border-[#d8e8f4] dark:border-white/5 transition-colors duration-300">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-gray-500 text-sm">Total Interactions</p>
+                    <p className="text-gray-500 dark:text-gray-400 text-sm">Total Interactions</p>
 
-                    <h2 className="text-4xl font-black text-[#1A6FBF] mt-2">
+                    <h2 className="text-4xl font-black text-[#1A6FBF] dark:text-[#3FA9D4] mt-2">
                       {interactionsCount}
                     </h2>
                   </div>

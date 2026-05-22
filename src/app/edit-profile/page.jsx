@@ -1,6 +1,6 @@
 "use client";
 
-import { useSession } from "@/lib/auth-client";
+import { useSession, authClient } from "@/lib/auth-client";
 
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -44,37 +44,51 @@ const ProfileEdit = () => {
     e.preventDefault();
     setLoading(true);
 
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/users/${authUser.email}`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: profile?.name,
-          image: profile?.image,
-          
-        }),
+    try {
+      // 1. Update Better Auth session & collection
+      const { data: authData, error: authError } = await authClient.updateUser({
+        name: profile?.name,
+        image: profile?.image,
+      });
+
+      if (authError) {
+        throw new Error(authError.message || "Failed to update auth profile");
       }
-    );
 
-    const data = await res.json();
+      // 2. Sync with custom backend
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/users/${authUser.email}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: profile?.name,
+            image: profile?.image,
+          }),
+        }
+      );
 
-    if (data.modifiedCount > 0 || data.upsertedCount > 0) {
-      toast.success("Profile updated");
-    } else {
-      toast.error("Nothing changed");
+      const data = await res.json();
+
+      if (data.modifiedCount > 0 || data.upsertedCount > 0 || authData) {
+        toast.success("Profile updated successfully");
+      } else {
+        toast.error("Nothing changed");
+      }
+    } catch (err) {
+      toast.error(err.message || "Failed to update profile");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
-    <div className="min-h-screen bg-[#F4F9FD] py-10 px-4">
-      <div className="max-w-3xl mx-auto bg-white rounded-2xl p-6 shadow">
+    <div className="min-h-screen bg-[#F4F9FD] dark:bg-[#0B0B0B] py-10 px-4 transition-colors duration-300">
+      <div className="max-w-3xl mx-auto bg-white dark:bg-[#1E1E1E] rounded-2xl p-6 border border-black/10 dark:border-white/5 shadow-sm transition-colors duration-300">
 
-        <h2 className="text-3xl font-bold text-[#1A6FBF] mb-6">
+        <h2 className="text-3xl font-bold text-[#1A6FBF] dark:text-[#3FA9D4] mb-6">
           Edit Profile
         </h2>
 
@@ -85,7 +99,7 @@ const ProfileEdit = () => {
             value={profile?.name}
             onChange={handleChange}
             placeholder="Name"
-            className="input w-full bg-white border-black/50 text-black border rounded-xl p-3"
+            className="input w-full bg-white dark:bg-[#2A2A2A] border-black/20 dark:border-white/10 text-black dark:text-white border rounded-xl p-3 focus:outline-none focus:border-[#3FA9D4]"
           />
 
           <input
@@ -93,13 +107,13 @@ const ProfileEdit = () => {
             value={profile?.image}
             onChange={handleChange}
             placeholder="Image URL"
-            className="input w-full bg-white border-black/50 text-black border rounded-xl p-3"
+            className="input w-full bg-white dark:bg-[#2A2A2A] border-black/20 dark:border-white/10 text-black dark:text-white border rounded-xl p-3 focus:outline-none focus:border-[#3FA9D4]"
           />
 
 
           <button
             disabled={loading}
-            className="bg-[#1A6FBF] text-white px-6 py-3 rounded-xl w-full"
+            className="bg-[#1A6FBF] hover:bg-[#3FA9D4] text-white px-6 py-3 rounded-xl w-full cursor-pointer transition duration-300 font-semibold"
           >
             {loading ? "Updating..." : "Update Profile"}
           </button>

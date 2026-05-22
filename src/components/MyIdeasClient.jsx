@@ -57,18 +57,18 @@ const MyIdeasClient = ({ ideas: initialIdeas }) => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F4F9FD] py-10 px-4">
+    <div className="min-h-screen bg-[#F4F9FD] dark:bg-[#0B0B0B] py-10 px-4 transition-colors duration-300">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-center lg:text-5xl text-4xl font-bold text-[#1A6FBF]">
           My Ideas
         </h2>
 
-        <p className="text-center text-gray-600 mt-3">
+        <p className="text-center text-gray-600 dark:text-gray-400 mt-3">
           You have shared {ideas?.length} ideas
         </p>
 
         {ideas?.length === 0 ? (
-          <div className="card bg-[#F4F9FD] shadow-xl p-6 h-[500px] mt-10 rounded-2xl border border-[#d8e8f4]">
+          <div className="card bg-white dark:bg-[#1E1E1E] shadow-xl p-6 h-[500px] mt-10 rounded-2xl border border-[#d8e8f4] dark:border-white/5">
             <div className="text-center flex flex-col items-center justify-center space-y-3 h-full">
               <Image
                 src="https://i.ibb.co.com/dJ0v02WH/idea.png"
@@ -81,7 +81,7 @@ const MyIdeasClient = ({ ideas: initialIdeas }) => {
                 No ideas yet
               </h2>
 
-              <p className="text-gray-600">
+              <p className="text-gray-600 dark:text-gray-400">
                 Share your first startup idea with the community
               </p>
 
@@ -97,7 +97,7 @@ const MyIdeasClient = ({ ideas: initialIdeas }) => {
             {ideas?.map((idea) => (
               <div
                 key={idea._id}
-                className="bg-white flex rounded-2xl border border-black/10 overflow-hidden"
+                className="bg-white dark:bg-[#1E1E1E] flex rounded-2xl border border-black/10 dark:border-white/5 overflow-hidden transition-colors duration-300"
               >
                 <div className="p-4">
                   <Image
@@ -119,23 +119,23 @@ const MyIdeasClient = ({ ideas: initialIdeas }) => {
                       {idea.title}
                     </h2>
 
-                    <p className="text-gray-600 line-clamp-2">
+                    <p className="text-gray-600 dark:text-gray-400 line-clamp-2">
                       {idea.shortDescription}
                     </p>
 
-            
+
                     {editingId === idea._id && (
                       <div className="space-y-2 mt-3">
                         <input
                           value={editedTitle}
                           onChange={(e) => setEditedTitle(e.target.value)}
-                          className="input bg-white border border-gray-300 text-black/50 w-full"
+                          className="input bg-white dark:bg-[#2A2A2A] border border-gray-300 dark:border-white/10 text-black dark:text-white w-full rounded-2xl"
                         />
 
                         <textarea
                           value={editedDesc}
                           onChange={(e) => setEditedDesc(e.target.value)}
-                          className="textarea bg-white border border-gray-300 text-black/50 textarea-bordered w-full"
+                          className="textarea bg-white dark:bg-[#2A2A2A] border border-gray-300 dark:border-white/10 text-black dark:text-white textarea-bordered w-full rounded-2xl"
                         />
 
                         <button
@@ -157,14 +157,14 @@ const MyIdeasClient = ({ ideas: initialIdeas }) => {
 
                     <button
                       onClick={() => handleEdit(idea)}
-                      className="btn btn-sm btn-ghost border text-[#1A6FBF] border-black/20 rounded-full hover:border-[#1A6FBF] hover:bg-[#1A6FBF]/10"
+                      className="btn btn-sm btn-ghost border text-[#1A6FBF] border-black/20 dark:border-white/10 rounded-full hover:border-[#1A6FBF] hover:bg-[#1A6FBF]/10"
                     >
                       Edit
                     </button>
 
                     <button
                       onClick={() => handleDelete(idea._id)}
-                      className="btn btn-sm btn-ghost rounded-full border border-black/20 text-red-500 hover:bg-red-50"
+                      className="btn btn-sm btn-ghost rounded-full border border-black/20 dark:border-white/10 text-red-500 hover:bg-red-50 dark:hover:bg-red-950/20"
                     >
                       Delete
                     </button>

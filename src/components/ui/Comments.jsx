@@ -103,11 +103,11 @@ const Comments = ({ ideaId }) => {
   return (
     <div className="max-w-7xl mx-auto px-4 mt-10">
       <div className="space-y-4">
-        <h2 className="text-4xl font-bold">Comments</h2>
+        <h2 className="text-4xl font-bold text-gray-800 dark:text-white">Comments</h2>
 
-        <div className="border p-6 shadow-lg rounded-2xl border-black/20 w-full bg-white">
+        <div className="border p-6 shadow-lg rounded-2xl border-black/20 dark:border-white/10 w-full bg-white dark:bg-[#1E1E1E]">
           <label className="label">
-            <span className="label-text mb-2 text-black font-semibold">
+            <span className="label-text mb-2 text-black dark:text-white font-semibold">
               Add a comment...
             </span>
           </label>
@@ -116,7 +116,7 @@ const Comments = ({ ideaId }) => {
             placeholder="Write your comment..."
             value={comment}
             onChange={(e) => setComment(e.target.value)}
-            className="textarea textarea-bordered w-full text-[black]/50 border border-black/50 rounded-2xl bg-white focus:outline-none focus:border-[#3FA9D4]"
+            className="textarea textarea-bordered w-full text-black dark:text-white border border-black/20 dark:border-white/10 rounded-2xl bg-white dark:bg-[#2A2A2A] focus:outline-none focus:border-[#3FA9D4]"
           />
 
           <button
@@ -131,21 +131,21 @@ const Comments = ({ ideaId }) => {
           {comments.map((item) => (
             <div
               key={item._id}
-              className="border border-black/10 rounded-2xl p-5 bg-white shadow-sm"
+              className="border border-black/10 dark:border-white/5 rounded-2xl p-5 bg-white dark:bg-[#1E1E1E] shadow-sm transition-colors duration-300"
             >
               <div className="flex justify-between">
                 <h3 className="font-bold text-[#1A6FBF]">{item.userName}</h3>
                 <div className="flex gap-2">
                   <button
                     onClick={() => handleEdit(item._id, item.comment)}
-                    className="btn btn-ghost border border-black/20 text-[#1A6FBF] rounded-full hover:border-[#1A6FBF]"
+                    className="btn btn-ghost border border-black/20 dark:border-white/10 text-[#1A6FBF] rounded-full hover:border-[#1A6FBF] dark:hover:bg-[#1A6FBF]/10"
                   >
                     Edit
                   </button>
 
                   <button
                     onClick={() => handleDelete(item._id)}
-                    className="btn btn-ghost rounded-full border border-black/20 text-red-500 hover:bg-red-50"
+                    className="btn btn-ghost rounded-full border border-black/20 dark:border-white/10 text-red-500 hover:bg-red-50 dark:hover:bg-red-950/20"
                   >
                     Delete
                   </button>
@@ -157,7 +157,7 @@ const Comments = ({ ideaId }) => {
                   <textarea
                     value={editedText}
                     onChange={(e) => setEditedText(e.target.value)}
-                    className="textarea rounded-2xl bg-white border border-black/50 text-[black]/50 textarea-bordered w-full"
+                    className="textarea rounded-2xl bg-white dark:bg-[#2A2A2A] border border-black/20 dark:border-white/10 text-black dark:text-white textarea-bordered w-full"
                   />
 
                   <button
@@ -168,10 +168,10 @@ const Comments = ({ ideaId }) => {
                   </button>
                 </div>
               ) : (
-                <p className="text-gray-600  mb-2">{item.comment}</p>
+                <p className="text-gray-600 dark:text-gray-300 mb-2">{item.comment}</p>
               )}
 
-              <p className="text-gray-600 text-blac text-sm">
+              <p className="text-gray-500 dark:text-gray-400 text-sm">
                 {new Date(item.createdAt).toLocaleString()}
               </p>
             </div>
