@@ -45,7 +45,7 @@ const ProfileEdit = () => {
     setLoading(true);
 
     try {
-      // 1. Update Better Auth session & collection
+   
       const { data: authData, error: authError } = await authClient.updateUser({
         name: profile?.name,
         image: profile?.image,
@@ -55,7 +55,7 @@ const ProfileEdit = () => {
         throw new Error(authError.message || "Failed to update auth profile");
       }
 
-      // 2. Sync with custom backend
+      
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/users/${authUser.email}`,
         {

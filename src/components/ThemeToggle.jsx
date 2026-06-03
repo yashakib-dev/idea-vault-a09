@@ -9,7 +9,7 @@ const ThemeToggle = () => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+   
     setMounted(true);
   }, []);
 
@@ -36,4 +36,4 @@ const ThemeToggle = () => {
   );
 };
 
-export default ThemeToggle;
+export default ThemeToggle;
