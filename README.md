@@ -1,4 +1,4 @@
-# IdeaVault
+# IdeaVault - A modern startup idea sharing platform
 
 A modern startup idea sharing platform where users can discover, share, manage, and discuss innovative startup ideas.
 
