@@ -16,6 +16,18 @@ const RegisterPage = () => {
     const formData = new FormData(e.currentTarget);
     const user = Object.fromEntries(formData.entries());
 
+    const isValid =
+      user.password.length >= 6 &&
+      /[A-Z]/.test(user.password) &&
+      /[a-z]/.test(user.password);
+
+    if (!isValid) {
+      setError(
+        "Password must be 8 or 8+ character with uppercase & lowercase letter",
+      );
+      return;
+    }
+
     const { data, error } = await authClient.signUp.email({
       name: user.name,
       email: user.email,
@@ -27,18 +39,6 @@ const RegisterPage = () => {
     }
     if (error) {
       toast.error(error.message);
-    }
-
-    const isValid =
-      user.password.length >= 6 &&
-      /[A-Z]/.test(user.password) &&
-      /[a-z]/.test(user.password);
-
-    if (!isValid) {
-      setError(
-        "Password must be 6 or 6+ character with uppercase & lowercase letter",
-      );
-      return;
     }
 
     setError("");

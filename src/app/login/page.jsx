@@ -21,17 +21,7 @@ const LoginPageContent = () => {
 
     const user = Object.fromEntries(formData.entries());
 
-    const isValid =
-      user.password.length >= 6 &&
-      /[A-Z]/.test(user.password) &&
-      /[a-z]/.test(user.password);
 
-    if (!isValid) {
-      setError(
-        "Password must be 6 or 6+ character with uppercase & lowercase letter"
-      );
-      return;
-    }
 
     const { data, error } = await authClient.signIn.email({
       email: user.email,
