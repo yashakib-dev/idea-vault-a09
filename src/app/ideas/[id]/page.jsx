@@ -93,7 +93,7 @@ const IdeaDetailsPage = async ({ params }) => {
         </div>
       </div>
 
-      <Comments></Comments>
+      <Comments ideaId={id} ideaTitle={title}></Comments>
 
     </div>
   );

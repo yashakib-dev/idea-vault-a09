@@ -1,6 +1,7 @@
 "use client";
 
 import { useSession } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -16,6 +17,7 @@ const categories = [
 ];
 
 const StartupIdeaForm = () => {
+  const router = useRouter();
   const { data: session } = useSession();
   const [formData, setFormData] = useState({
     title: "",
@@ -58,6 +60,7 @@ const StartupIdeaForm = () => {
     const data = await res.json();
     toast.success("Idea added successfully!");
     console.log(data);
+    router.push("/ideas");
   };
 
   return (

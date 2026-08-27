@@ -27,9 +27,9 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-[#0B0B0B] text-black dark:text-white transition-colors duration-300">
-      <div className="border-b border-gray-200 dark:border-white/10 shadow-sm">
-        <div className="navbar container mx-auto py-5 ">
+    <div className="sticky top-0 z-40 bg-white/60 dark:bg-[#0B0B0B]/60 backdrop-blur-md text-black dark:text-white transition-colors duration-300 border-b border-black/5 dark:border-white/10">
+      <div>
+        <div className="navbar container mx-auto py-4">
           <div className="navbar-start">
             <div className="dropdown">
               <label

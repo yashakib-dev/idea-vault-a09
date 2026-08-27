@@ -62,12 +62,12 @@ const LoginClient = ({
             )}
 
             <div className="flex justify-end">
-              <Link
+              {/* <Link
                 href="/login"
                 className="text-sm text-[#1A6FBF] dark:text-[#3FA9D4] hover:text-[#3FA9D4] transition"
               >
                 Forgot Password?
-              </Link>
+              </Link> */}
             </div>
 
             <button
