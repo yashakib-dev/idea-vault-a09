@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "cypress:open": "node scripts/run-cypress.js open",
+    "cypress:run": "node scripts/run-cypress.js run",
+    "test:e2e": "node scripts/run-cypress.js run"
   },
   "dependencies": {
     "@better-auth/mongo-adapter": "^1.6.11",
@@ -24,6 +27,8 @@
     "@tailwindcss/postcss": "^4",
     "autoprefixer": "^10.5.0",
     "babel-plugin-react-compiler": "1.0.0",
+    "cross-env": "^10.1.0",
+    "cypress": "^16.2.1",
     "daisyui": "^5.5.19",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",

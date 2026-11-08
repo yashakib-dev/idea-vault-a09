@@ -18,9 +18,54 @@ const Comments = ({ ideaId, title }) => {
 
   useEffect(() => {
     if (!ideaId) return;
+
+    // Initial load of comments
     fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comments/${ideaId}`)
       .then((res) => res.json())
-      .then((data) => setComments(data));
+      .then((data) => {
+        if (Array.isArray(data)) setComments(data);
+      })
+      .catch((err) => console.error("Error fetching comments:", err));
+
+    // Real-time comment updates via Server-Sent Events (SSE)
+    let eventSource;
+    if (typeof window !== "undefined" && typeof EventSource !== "undefined") {
+      eventSource = new EventSource(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/comments/${ideaId}/stream`
+      );
+
+      eventSource.onmessage = (event) => {
+        try {
+          const payload = JSON.parse(event.data);
+          if (payload.type === "comment:created" && payload.data) {
+            setComments((prev) => {
+              if (prev.some((c) => c._id === payload.data._id)) return prev;
+              return [payload.data, ...prev];
+            });
+          } else if (payload.type === "comment:updated" && payload.data) {
+            setComments((prev) =>
+              prev.map((c) =>
+                c._id === payload.data._id
+                  ? { ...c, comment: payload.data.comment }
+                  : c
+              )
+            );
+          } else if (payload.type === "comment:deleted" && payload.data) {
+            setComments((prev) =>
+              prev.filter((c) => c._id !== payload.data._id)
+            );
+          }
+        } catch (err) {
+          console.error("SSE comment stream parse error:", err);
+        }
+      };
+    }
+
+    return () => {
+      if (eventSource) {
+        eventSource.close();
+      }
+    };
   }, [ideaId]);
 
   const { data: session } = authClient.useSession();
