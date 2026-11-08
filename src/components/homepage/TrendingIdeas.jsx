@@ -5,11 +5,19 @@ import { FaArrowRightLong } from "react-icons/fa6";
 
 
 const TrendingIdeas = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/ideas`, {
-    cache: "no-store",
-  });
-
-  const ideas = await res.json();
+  let ideas = [];
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/ideas`, {
+      cache: "no-store",
+    });
+    if (res.ok) {
+      const data = await res.json();
+      // API returns a plain array; guard against unexpected shapes
+      ideas = Array.isArray(data) ? data : (data?.value ?? []);
+    }
+  } catch {
+    // API unavailable — render empty state below
+  }
 
 
   return (
@@ -27,6 +35,9 @@ const TrendingIdeas = async () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {ideas.length === 0 && (
+            <p className="text-gray-400 col-span-3 text-center py-10">No ideas found.</p>
+          )}
           {ideas.map((idea) => (
             <div
               key={idea._id}

@@ -5,12 +5,18 @@ export const metadata = {
 };
 
 const IdeaPage = async () => {
-
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-ideas`, {
-    cache: "no-store",
-  });
-
-  const ideas = await res.json();
+  let ideas = [];
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-ideas`, {
+      cache: "no-store",
+    });
+    if (res.ok) {
+      const data = await res.json();
+      ideas = Array.isArray(data) ? data : (data?.value ?? []);
+    }
+  } catch {
+    // API unavailable — render empty state
+  }
 
   return (
     <div className="bg-[#F4F9FD] dark:bg-[#0B0B0B] py-24 transition-colors duration-300">

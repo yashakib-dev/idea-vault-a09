@@ -12,14 +12,21 @@ const MyInteractionsPage = async () => {
     headers: await headers(),
   });
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/my-comments/${session?.user?.email}`,
-    {
-      cache: "no-store",
-    },
-  );
-
-  const comments = await res.json();
+  let comments = [];
+  if (session?.user?.email) {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/my-comments/${session.user.email}`,
+        { cache: "no-store" },
+      );
+      if (res.ok) {
+        const data = await res.json();
+        comments = Array.isArray(data) ? data : [];
+      }
+    } catch {
+      // API unavailable
+    }
+  }
 
   return <MyInteractionsClient initialComments={comments} />;
 };

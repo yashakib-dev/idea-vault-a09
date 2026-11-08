@@ -12,17 +12,33 @@ export const metadata = {
 const IdeaDetailsPage = async ({ params }) => {
   const { id } = await params;
 
-  const { token } = await auth.api.getToken({
-    headers: await headers(),
-  });
+  // getToken returns null if the user is not logged in — handle gracefully
+  let token = null;
+  try {
+    const tokenResult = await auth.api.getToken({
+      headers: await headers(),
+    });
+    token = tokenResult?.token ?? null;
+  } catch {
+    // unauthenticated — proceed without token
+  }
+
+  const fetchHeaders = token ? { authorization: `Bearer ${token}` } : {};
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/ideas/${id}`, {
-    headers: {
-      authorization: `Bearer ${token}`,
-    },
+    headers: fetchHeaders,
+    cache: "no-store",
   });
+
+  if (!res.ok) {
+    return (
+      <div className="bg-[#F4F9FD] dark:bg-[#0B0B0B] py-10 min-h-screen flex items-center justify-center">
+        <p className="text-gray-500 dark:text-gray-400">Idea not found.</p>
+      </div>
+    );
+  }
+
   const ideas = await res.json();
-  
 
   const {
     title,
@@ -34,7 +50,16 @@ const IdeaDetailsPage = async ({ params }) => {
     budget,
     detailedDescription,
     shortDescription,
-  } = ideas;
+  } = ideas ?? {};
+
+  if (!title) {
+    return (
+      <div className="bg-[#F4F9FD] dark:bg-[#0B0B0B] py-10 min-h-screen flex items-center justify-center">
+        <p className="text-gray-500 dark:text-gray-400">Idea not found.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-[#F4F9FD] dark:bg-[#0B0B0B] py-10 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4">
@@ -47,13 +72,15 @@ const IdeaDetailsPage = async ({ params }) => {
         </Link>
 
         <div className="relative">
-          <Image
-            src={imageURL}
-            alt={title}
-            width={1400}
-            height={800}
-            className="w-full lg:h-120 object-cover rounded-2xl"
-          ></Image>
+          {imageURL && (
+            <Image
+              src={imageURL}
+              alt={title}
+              width={1400}
+              height={800}
+              className="w-full lg:h-120 object-cover rounded-2xl"
+            />
+          )}
           <div className="space-y-5">
             <p className="inline-flex absolute top-5 md:right-10 right-5 items-center rounded-full bg-[#1A6FBF] md:px-6 px-4 py-1 md:py-2 text-xs font-semibold text-[white] ">
             {tags}
